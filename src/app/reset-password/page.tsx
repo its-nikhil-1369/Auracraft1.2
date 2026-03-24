@@ -1,13 +1,14 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
+import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Lock, Eye, EyeOff } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
-export default function ResetPasswordPage() {
+function ResetPasswordForm() {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
@@ -29,8 +30,6 @@ export default function ResetPasswordPage() {
             return;
         }
 
-        // In a real app, you would validate the token here
-        // For demo purposes, we'll assume any token is valid
         setIsValidToken(true);
         setIsLoading(false);
     }, [token]);
@@ -189,7 +188,7 @@ export default function ResetPasswordPage() {
 
             {/* Right side: Image Decor */}
             <div className="hidden lg:block flex-1 relative bg-gray-100">
-                <img
+                <Image
                     src="https://images.unsplash.com/photo-1549037173-e3b717902c57?q=80&w=1200&auto=format&fit=crop"
                     alt="Reset Password Visual"
                     fill
@@ -202,5 +201,13 @@ export default function ResetPasswordPage() {
                 </div>
             </div>
         </div>
+    );
+}
+
+export default function ResetPasswordPage() {
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <ResetPasswordForm />
+        </Suspense>
     );
 }
