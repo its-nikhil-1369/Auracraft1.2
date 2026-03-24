@@ -1,10 +1,10 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import dbConnect from '@/lib/db';
 import Order from '@/models/Order';
 import { isAdmin } from '@/lib/auth';
 
 export async function DELETE(
-    req: Request,
+    req: NextRequest,
     context: { params: Promise<{ id: string }> }
 ) {
     try {

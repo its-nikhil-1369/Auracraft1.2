@@ -1,10 +1,10 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import dbConnect from '@/lib/db';
 import User from '@/models/User';
 import { isAdmin } from '@/lib/auth';
 
 export async function PATCH(
-    request: Request,
+    request: NextRequest,
     context: { params: Promise<{ id: string }> }
 ) {
     try {
